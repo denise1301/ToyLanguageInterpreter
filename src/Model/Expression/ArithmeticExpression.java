@@ -4,14 +4,18 @@ import Exceptions.DivisionByZero;
 import Exceptions.TypeError;
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
+import Model.Containers.MyMap;
+import Model.Type.IType;
 import Model.Type.IntType;
 import Model.Value.IValue;
 import Model.Value.IntValue;
 
+import java.lang.reflect.Type;
+
 public class ArithmeticExpression implements IExpression {
-    private IExpression exp1;
-    private IExpression exp2;
-    private ArithmeticOperation operation;
+    private final IExpression exp1;
+    private final IExpression exp2;
+    private final ArithmeticOperation operation;
 
     public ArithmeticExpression(IExpression exp1, IExpression exp2, ArithmeticOperation operation){
         this.exp1 = exp1;
@@ -38,6 +42,18 @@ public class ArithmeticExpression implements IExpression {
             } else throw new TypeError("The entered value is not an integer!");
         } else throw new TypeError("The entered value is not an integer!");
         return new IntValue(0);
+    }
+
+    @Override
+    public IType typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType type1, type2;
+        type1 = exp1.typeCheck(typeEnv);
+        type2 = exp2.typeCheck(typeEnv);
+        if (type1.equals(new IntType())) {
+            if (type2.equals(new IntType())) {
+                return new IntType();
+            } else throw new Exception("Second operand is not an integer!");
+        } else throw new Exception("First operand is not an integer!");
     }
 
     @Override

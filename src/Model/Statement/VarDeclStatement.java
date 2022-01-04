@@ -30,6 +30,12 @@ public class VarDeclStatement implements IStatement {
     }
 
     @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        typeEnv.add(this.name, this.type);
+        return typeEnv;
+    }
+
+    @Override
     public String toString() {
         return type.toString() + " " + name;
     }

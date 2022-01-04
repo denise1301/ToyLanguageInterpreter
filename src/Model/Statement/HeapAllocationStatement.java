@@ -4,13 +4,14 @@ import Model.Containers.IHeap;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Type.RefType;
 import Model.Value.IValue;
 import Model.Value.RefValue;
 
 public class HeapAllocationStatement implements IStatement {
-    private String name;
-    private IExpression expression;
+    private final String name;
+    private final IExpression expression;
 
     public HeapAllocationStatement(String name, IExpression exp) {
         this.name = name;
@@ -35,6 +36,15 @@ public class HeapAllocationStatement implements IStatement {
                 } else throw new Exception("The types do not coincide!");
             } else throw new Exception("The variable associated to the provided VarName is not of type RefType");
         } else throw new Exception("The provided VarName couldn't be found in Symbol Table");
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeVar = typeEnv.get(this.name);
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeVar.equals(new RefType(typeExp))) {
+            return typeEnv;
+        } else throw new Exception("In the Heap Allocation the right hand side and left hand side have different types!");
     }
 
     @Override

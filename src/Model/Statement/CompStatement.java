@@ -1,7 +1,9 @@
 package Model.Statement;
 
+import Model.Containers.IMap;
 import Model.Containers.IStack;
 import Model.ProgramState;
+import Model.Type.IType;
 
 public class CompStatement implements IStatement {
     private IStatement first;
@@ -18,6 +20,11 @@ public class CompStatement implements IStatement {
         stack.push(second);
         stack.push(first);
         return null;
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        return this.second.typeCheck(this.first.typeCheck(typeEnv));
     }
 
     @Override

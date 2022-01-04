@@ -3,6 +3,7 @@ package Model.Statement;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Type.StringType;
 import Model.Value.IValue;
 import Model.Value.StringValue;
@@ -30,6 +31,14 @@ public class CloseRFileStatement implements IStatement {
                 return null;
             } else throw new Exception("There is no entry associated to this filename");
         } else throw new Exception("The type must be a string");
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeExp.equals(new StringType())) {
+            return typeEnv;
+        } else throw new Exception("The expression doesn't have a String type!");
     }
 
     @Override

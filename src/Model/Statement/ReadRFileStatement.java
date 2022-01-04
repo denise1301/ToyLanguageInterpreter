@@ -5,6 +5,7 @@ import Exceptions.TypeError;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Type.IntType;
 import Model.Type.StringType;
 import Model.Value.IValue;
@@ -45,6 +46,15 @@ public class ReadRFileStatement implements IStatement {
                 } else throw new TypeError("Given variable is not an string!");
             } else throw new TypeError("Given variable is not an int!");
         } else throw new DefError("Given variable is not defined!");
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeVar = typeEnv.get(this.name);
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeVar.equals(new IntType()) && typeExp.equals(new StringType())) {
+            return typeEnv;
+        } else throw new Exception("Invalid variable name or the expression doesn't have a String type!");
     }
 
     @Override

@@ -6,6 +6,7 @@ import Model.Containers.IStack;
 import Model.Expression.IExpression;
 import Model.ProgramState;
 import Model.Type.BoolType;
+import Model.Type.IType;
 import Model.Value.BoolValue;
 import Model.Value.IValue;
 
@@ -35,6 +36,16 @@ public class IfStatement implements IStatement {
             }
         } else throw new TypeError("The condition type is incorrect!");
         return null;
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeExp = this.conditionExpression.typeCheck(typeEnv);
+        if (typeExp.equals(new BoolType())) {
+            this.thenStatement.typeCheck(typeEnv);
+            this.elseStatement.typeCheck(typeEnv);
+            return typeEnv;
+        } else throw new Exception("The condition of If doesn't have the type bool!");
     }
 
     @Override

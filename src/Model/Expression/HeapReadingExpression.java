@@ -2,11 +2,14 @@ package Model.Expression;
 
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
+import Model.Containers.MyMap;
+import Model.Type.IType;
+import Model.Type.RefType;
 import Model.Value.IValue;
 import Model.Value.RefValue;
 
 public class HeapReadingExpression implements IExpression {
-    private IExpression exp;
+    private final IExpression exp;
 
     public HeapReadingExpression(IExpression exp) {
         this.exp = exp;
@@ -19,10 +22,17 @@ public class HeapReadingExpression implements IExpression {
             int key = ((RefValue) value).getAddress();
             if (heap.hasKey(key)) {
                 return heap.get(key);
-            }
-            throw new Exception("The Heap does not contain that key!");
-        }
-        throw new Exception("The evaluated expression is not of type RefValue!");
+            } else throw new Exception("The Heap does not contain that key!");
+        } else throw new Exception("The evaluated expression is not of type RefValue!");
+    }
+
+    @Override
+    public IType typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType type = exp.typeCheck(typeEnv);
+
+        if (type instanceof RefType refType) {
+            return refType.getInner();
+        } else throw new Exception("The argument is not a RefType!");
     }
 
     @Override

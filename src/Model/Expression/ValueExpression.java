@@ -2,6 +2,8 @@ package Model.Expression;
 
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
+import Model.Containers.MyMap;
+import Model.Type.IType;
 import Model.Value.IValue;
 
 public class ValueExpression implements IExpression {
@@ -14,6 +16,11 @@ public class ValueExpression implements IExpression {
     @Override
     public IValue evaluate(IMap<String, IValue> symbolTable, IHeap<IValue> heap) {
         return value;
+    }
+
+    @Override
+    public IType typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        return value.getType();
     }
 
     public String toString() {

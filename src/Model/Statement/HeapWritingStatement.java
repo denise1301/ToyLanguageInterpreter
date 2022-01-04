@@ -4,6 +4,7 @@ import Model.Containers.IHeap;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Type.RefType;
 import Model.Value.IValue;
 import Model.Value.RefValue;
@@ -39,6 +40,15 @@ public class HeapWritingStatement implements IStatement {
             throw new Exception("The variable associated to the provided VarName is not of type RefType");
         }
         throw new Exception("VarName not found in SymbolTable!");
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeVar = typeEnv.get(this.name);
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeVar.equals(new RefType(typeExp))) {
+            return typeEnv;
+        } else throw new Exception("In the Heap Writing the right hand side and left hand side have different types!");
     }
 
     @Override

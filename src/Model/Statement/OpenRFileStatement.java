@@ -4,6 +4,7 @@ import Exceptions.TypeError;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Type.StringType;
 import Model.Value.IValue;
 import Model.Value.StringValue;
@@ -39,6 +40,14 @@ public class OpenRFileStatement implements IStatement {
             throw new Exception("The given file already exists!");
         }
         throw new TypeError("Expression is not of type StringType!");
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeExp.equals(new StringType())) {
+            return typeEnv;
+        } else throw new Exception("The expression doesn't have a String type!");
     }
 
     @Override

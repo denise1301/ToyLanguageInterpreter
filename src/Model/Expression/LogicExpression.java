@@ -3,14 +3,16 @@ package Model.Expression;
 import Exceptions.TypeError;
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
+import Model.Containers.MyMap;
 import Model.Type.BoolType;
+import Model.Type.IType;
 import Model.Value.BoolValue;
 import Model.Value.IValue;
 
 public class LogicExpression implements IExpression {
-    private IExpression exp1;
-    private IExpression exp2;
-    private LogicOperation operation;
+    private final IExpression exp1;
+    private final IExpression exp2;
+    private final LogicOperation operation;
 
     public LogicExpression(IExpression exp1, IExpression exp2, LogicOperation operation) {
         this.exp1 = exp1;
@@ -32,6 +34,19 @@ public class LogicExpression implements IExpression {
             } else throw new TypeError("The entered value is not a boolean!");
         } else throw new TypeError("The entered value is not a boolean!");
         return new BoolValue(false);
+    }
+
+    @Override
+    public IType typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType type1, type2;
+        type1 = exp1.typeCheck(typeEnv);
+        type2 = exp2.typeCheck(typeEnv);
+
+        if (type1.equals(new BoolType())) {
+            if (type2.equals(new BoolType())) {
+                return new BoolType();
+            } else throw new Exception("Second operand is not a boolean!");
+        } else throw new Exception("First operand is not a boolean!");
     }
 
     public String toString() {

@@ -32,6 +32,17 @@ public class AssignStatement implements IStatement {
     }
 
     @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeVar = typeEnv.get(this.name);
+        IType typeExp = this.expression.typeCheck(typeEnv);
+
+        if (typeVar.equals(typeExp))
+            return typeEnv;
+        else
+            throw new Exception("Assignment right hand side and left hand side have different types!");
+    }
+
+    @Override
     public String toString() {
         return name + " = " + expression.toString();
     }

@@ -4,6 +4,8 @@ import Model.Containers.IMap;
 import Model.Containers.IStack;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.BoolType;
+import Model.Type.IType;
 import Model.Value.BoolValue;
 import Model.Value.IValue;
 
@@ -28,6 +30,15 @@ public class WhileStatement implements IStatement {
             }
         } else throw new Exception("Conditional expression is not a boolean!");
         return null;
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType typeExp = this.expression.typeCheck(typeEnv);
+        if (typeExp.equals(new BoolType())) {
+            this.whileStatement.typeCheck(typeEnv);
+            return typeEnv;
+        } else throw new Exception("The condition of While doesn't have the type bool!");
     }
 
     @Override

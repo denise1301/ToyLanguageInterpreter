@@ -2,6 +2,9 @@ package Model.Expression;
 
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
+import Model.Containers.MyMap;
+import Model.Type.BoolType;
+import Model.Type.IType;
 import Model.Type.IntType;
 import Model.Value.BoolValue;
 import Model.Value.IValue;
@@ -50,6 +53,19 @@ public class RelationalExpression implements IExpression {
             throw new Exception("First operand is not a int!");
         }
         return null;
+    }
+
+    @Override
+    public IType typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        IType type1, type2;
+        type1 = exp1.typeCheck(typeEnv);
+        type2 = exp2.typeCheck(typeEnv);
+
+        if (type1.equals(new IntType())) {
+            if (type2.equals(new IntType())) {
+                return new BoolType();
+            } else throw new Exception("Second operand is not an integer!");
+        } else throw new Exception("First operand is not an integer!");
     }
 
     @Override

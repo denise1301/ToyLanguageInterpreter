@@ -4,6 +4,7 @@ import Model.Containers.IList;
 import Model.Containers.IMap;
 import Model.Expression.IExpression;
 import Model.ProgramState;
+import Model.Type.IType;
 import Model.Value.IValue;
 
 public class PrintStatement implements IStatement {
@@ -20,6 +21,12 @@ public class PrintStatement implements IStatement {
         out.add(expression.evaluate(table, state.getHeap()));
         state.setOut(out);
         return null;
+    }
+
+    @Override
+    public IMap<String, IType> typeCheck(IMap<String, IType> typeEnv) throws Exception {
+        this.expression.typeCheck(typeEnv);
+        return typeEnv;
     }
 
     @Override

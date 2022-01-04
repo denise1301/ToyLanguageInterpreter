@@ -1,17 +1,20 @@
 package View;
 
 import Controller.Controller;
+import Model.Containers.IList;
+import Model.Containers.IMap;
+import Model.Containers.MyList;
+import Model.Containers.MyMap;
 import Model.Expression.*;
 import Model.ProgramState;
 import Model.Statement.*;
-import Model.Type.BoolType;
-import Model.Type.IntType;
-import Model.Type.RefType;
-import Model.Type.StringType;
+import Model.Type.*;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
 import Repository.Repository;
+
+import java.util.List;
 
 public class Interpreter {
     public static void main(String[] args) throws Exception {
@@ -120,6 +123,29 @@ public class Interpreter {
                                                 new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(32))),
                                                         new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a"))))))),
                                                 new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a")))))))));
+
+        try {
+            IList<IStatement> statements = new MyList<IStatement>();
+            statements.add(ex1);
+            statements.add(ex2);
+            statements.add(ex3);
+            statements.add(ex4);
+            statements.add(ex5);
+            statements.add(ex6);
+            statements.add(ex7);
+            statements.add(ex8);
+            statements.add(ex9);
+            statements.add(ex10);
+            for (int i = 0; i < statements.size(); i++) {
+                IMap<String, IType> typeEnv = new MyMap<>();
+                statements.get(i).typeCheck(typeEnv);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+        System.out.println("All type checks have passed successfully!");
+
 
         ProgramState programState1 = new ProgramState(ex1);
         ProgramState programState2 = new ProgramState(ex2);

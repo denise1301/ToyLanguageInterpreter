@@ -1,0 +1,426 @@
+-----------------------------------
+Thread ID: 9
+Execution stack: [(Int v; (Ref(Int) a; (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))))))]
+Symbol table: 
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [Int v, (Ref(Int) a; (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))))]
+Symbol table: 
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [Int v, (Ref(Int) a; (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))))]
+Symbol table: 
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(Ref(Int) a; (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))))]
+Symbol table: v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(Ref(Int) a; (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))))]
+Symbol table: v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [Ref(Int) a, (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))))]
+Symbol table: v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [Ref(Int) a, (v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))))]
+Symbol table: v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))))]
+Symbol table: a = (0, Int)
+v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(v = 10; ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))))]
+Symbol table: a = (0, Int)
+v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [v = 10, ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))]
+Symbol table: a = (0, Int)
+v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [v = 10, ((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))]
+Symbol table: a = (0, Int)
+v = 0
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))]
+Symbol table: a = (0, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [((new a 22); (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a)))))]
+Symbol table: a = (0, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(new a 22), (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))]
+Symbol table: a = (0, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(new a 22), (fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))]
+Symbol table: a = (0, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))); (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))), (print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [fork((wH(a 30); (v = 32; (print(v); print(rH(a)))))), (print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(wH(a 30); (v = 32; (print(v); print(rH(a)))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [(print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(wH(a 30); (v = 32; (print(v); print(rH(a)))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [print(v), print(rH(a))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [wH(a 30), (v = 32; (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [print(v), print(rH(a))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [wH(a 30), (v = 32; (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: []
+File table: 
+Heap: 1 = 22
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [print(rH(a))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(v = 32; (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: [print(rH(a))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(v = 32; (print(v); print(rH(a))))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 9
+Execution stack: []
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [v = 32, (print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [v = 32, (print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 10
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [(print(v); print(rH(a)))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [print(v), print(rH(a))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [print(v), print(rH(a))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [print(rH(a))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30, 32]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: [print(rH(a))]
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30, 32]
+File table: 
+Heap: 1 = 30
+
+
+-----------------------------------
+Thread ID: 10
+Execution stack: []
+Symbol table: a = (1, Int)
+v = 32
+
+Output: [10, 30, 32, 30]
+File table: 
+Heap: 1 = 30
+
+

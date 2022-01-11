@@ -119,7 +119,7 @@ public class Interpreter {
                 new CompStatement(new VarDeclStatement("a", new RefType(new IntType())),
                         new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(10))),
                                 new CompStatement(new HeapAllocationStatement("a", new ValueExpression(new IntValue(22))),
-                                        new CompStatement(new ForkStatement(new CompStatement(new HeapWritingStatement("a", new ValueExpression(new IntValue(30))),
+                                        new CompStatement(new ForkStatement(new CompStatement(new HeapWritingStatement("a", new ValueExpression(new BoolValue(true))),
                                                 new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(32))),
                                                         new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a"))))))),
                                                 new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a")))))))));
@@ -143,7 +143,7 @@ public class Interpreter {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.exit(1);
-        }
+        } //filter out incorrect statements
         System.out.println("All type checks have passed successfully!");
 
 

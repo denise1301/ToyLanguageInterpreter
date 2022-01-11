@@ -9,7 +9,7 @@ import Model.Value.StringValue;
 import java.io.BufferedReader;
 
 public class ProgramState {
-    private static int threadCount = 0;
+    private static int threadCount = 1;
     private final int threadId;
     private IStatement originalProgram;
     private IStack<IStatement> executionStack;

@@ -2,7 +2,6 @@ package Model.Expression;
 
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
-import Model.Containers.MyMap;
 import Model.Type.BoolType;
 import Model.Type.IType;
 import Model.Type.IntType;

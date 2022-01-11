@@ -8,4 +8,6 @@ public interface IRepository {
     void setProgramStatesList(IList<ProgramState> newList);
     void addState(ProgramState newState);
     void logPrgStateExec(ProgramState state) throws Exception;
+
+    ProgramState getProgramStateById(int id);
 }

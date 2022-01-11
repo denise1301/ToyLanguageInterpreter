@@ -35,4 +35,9 @@ public class MyStack<T> implements IStack<T> {
         Collections.reverse(toList);
         return toList.toString();
     }
+
+    @Override
+    public List<T> getAll() {
+        return stack;
+    }
 }

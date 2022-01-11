@@ -3,7 +3,6 @@ package Model.Expression;
 import Exceptions.DefError;
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
-import Model.Containers.MyMap;
 import Model.Type.IType;
 import Model.Value.IValue;
 

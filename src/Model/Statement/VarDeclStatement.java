@@ -2,14 +2,9 @@ package Model.Statement;
 
 import Exceptions.DefError;
 import Model.Containers.IMap;
-import Model.Containers.IStack;
 import Model.ProgramState;
-import Model.Type.BoolType;
 import Model.Type.IType;
-import Model.Type.IntType;
-import Model.Value.BoolValue;
 import Model.Value.IValue;
-import Model.Value.IntValue;
 
 public class VarDeclStatement implements IStatement {
     String name;

@@ -96,4 +96,8 @@ public class ProgramState {
         result = result + "Heap: " + heap.toString() + "\n";
         return result;
     }
+
+    public int getIdThread() {
+        return threadId;
+    }
 }

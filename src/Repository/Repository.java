@@ -44,4 +44,9 @@ public class Repository implements IRepository {
         logFile.flush();
         logFile.close();
     }
+
+    @Override
+    public ProgramState getProgramStateById(int id) {
+        return states.get(id);
+    }
 }

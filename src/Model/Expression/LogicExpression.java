@@ -3,7 +3,6 @@ package Model.Expression;
 import Exceptions.TypeError;
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
-import Model.Containers.MyMap;
 import Model.Type.BoolType;
 import Model.Type.IType;
 import Model.Value.BoolValue;

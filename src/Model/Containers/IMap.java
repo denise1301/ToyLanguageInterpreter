@@ -1,6 +1,7 @@
 package Model.Containers;
 
 import java.util.Collection;
+import java.util.Set;
 
 public interface IMap<K, V> {
     void add(K key, V Value) throws Exception;
@@ -11,4 +12,6 @@ public interface IMap<K, V> {
     boolean hasKey(K key);
     boolean isEmpty();
     String toString();
+    int size();
+    Set<K> keySet();
 }

@@ -3,9 +3,8 @@ package Controller;
 import Model.Containers.IList;
 import Model.Containers.MyList;
 import Model.ProgramState;
-import Model.Value.IValue;
-import Model.Value.RefValue;
 import Repository.IRepository;
+import Repository.Repository;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -19,6 +18,10 @@ public class Controller implements IController {
 
     public Controller(IRepository repository) {
         this.repository = repository;
+    }
+
+    public IRepository getRepository() {
+        return repository;
     }
 
     public void oneStepForAllPrograms(List<ProgramState> states) throws Exception {

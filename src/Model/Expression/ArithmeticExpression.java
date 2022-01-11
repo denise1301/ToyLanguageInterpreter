@@ -4,13 +4,10 @@ import Exceptions.DivisionByZero;
 import Exceptions.TypeError;
 import Model.Containers.IHeap;
 import Model.Containers.IMap;
-import Model.Containers.MyMap;
 import Model.Type.IType;
 import Model.Type.IntType;
 import Model.Value.IValue;
 import Model.Value.IntValue;
-
-import java.lang.reflect.Type;
 
 public class ArithmeticExpression implements IExpression {
     private final IExpression exp1;

@@ -1,7 +1,6 @@
 package Model.Containers;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 public interface IHeap<V> {
@@ -12,4 +11,6 @@ public interface IHeap<V> {
     V get(int key);
     boolean hasKey(int key);
     Collection<V> values();
+
+    Iterable<Map.Entry<Integer, V>> getEntries();
 }

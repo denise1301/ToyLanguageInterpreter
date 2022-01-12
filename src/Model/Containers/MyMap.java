@@ -2,6 +2,7 @@ package Model.Containers;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class MyMap<K, V> implements IMap<K, V> {
@@ -38,6 +39,11 @@ public class MyMap<K, V> implements IMap<K, V> {
     }
 
     @Override
+    public Map<K, V> getAll() {
+        return map;
+    }
+
+    @Override
     public void update(K key, V value) {
         map.put(key, value);
     }
@@ -56,11 +62,6 @@ public class MyMap<K, V> implements IMap<K, V> {
         StringBuilder result = new StringBuilder();
         map.forEach((k, v) -> result.append(k.toString()).append(" = ").append(v.toString()).append("\n"));
         return result.toString();
-    }
-
-    @Override
-    public int size() {
-        return map.size();
     }
 
     @Override

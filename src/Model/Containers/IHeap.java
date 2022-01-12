@@ -11,6 +11,4 @@ public interface IHeap<V> {
     V get(int key);
     boolean hasKey(int key);
     Collection<V> values();
-
-    Iterable<Map.Entry<Integer, V>> getEntries();
 }

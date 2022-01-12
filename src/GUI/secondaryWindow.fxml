@@ -5,10 +5,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SelectFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SecondaryWindowController">
     <children>
         <ListView fx:id="programListView" layoutX="27.0" layoutY="62.0" prefHeight="412.0" prefWidth="453.0" />
-        <Label layoutX="176.0" layoutY="24.0" prefHeight="29.0" prefWidth="153.0" text="Select a program to execute:" />
+        <Label layoutX="173.0" layoutY="24.0" prefHeight="29.0" prefWidth="158.0" text="Select a program to execute:" />
         <Button fx:id="executeButton" layoutX="202.0" layoutY="492.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" text="Execute" />
     </children>
 </AnchorPane>

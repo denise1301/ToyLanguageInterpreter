@@ -56,11 +56,6 @@ public class MyHeap<V> implements IHeap<V> {
     }
 
     @Override
-    public Iterable<Map.Entry<Integer, V>> getEntries() {
-        return heap.entrySet();
-    }
-
-    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         heap.forEach((k, v) -> result.append(k.toString()).append(" = ").append(v.toString()).append("\n"));

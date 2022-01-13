@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Repository implements IRepository {
     private IList<ProgramState> states;
@@ -22,8 +23,8 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public IList<ProgramState> getProgramStatesList() {
-        return this.states;
+    public List<ProgramState> getProgramStatesList() {
+        return this.states.getAll();
     }
 
     @Override

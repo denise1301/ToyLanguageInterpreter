@@ -9,14 +9,14 @@ import Model.Value.StringValue;
 import java.io.BufferedReader;
 
 public class ProgramState {
-    private static int threadCount = 0;
+    private static int threadCount = 1;
     private final int threadId;
     private IStatement originalProgram;
-    private IStack<IStatement> executionStack;
-    private IMap<String, IValue> symbolTable;
+    private final IStack<IStatement> executionStack;
+    private final IMap<String, IValue> symbolTable;
     private IList<IValue> out;
-    private IMap<StringValue, BufferedReader> fileTable;
-    private IHeap<IValue> heap;
+    private final IMap<StringValue, BufferedReader> fileTable;
+    private final IHeap<IValue> heap;
 
     private synchronized static int getThreadId() {
         threadCount++;
@@ -42,11 +42,11 @@ public class ProgramState {
 
     public ProgramState(IStatement statement) {
         threadId = getThreadId();
-        executionStack = new MyStack<IStatement>();
-        symbolTable = new MyMap<String, IValue>();
-        out = new MyList<IValue>();
-        fileTable = new MyMap<StringValue, BufferedReader>();
-        heap = new MyHeap<IValue>();
+        executionStack = new MyStack<>();
+        symbolTable = new MyMap<>();
+        out = new MyList<>();
+        fileTable = new MyMap<>();
+        heap = new MyHeap<>();
         executionStack.push(statement);
         originalProgram = statement;
     }

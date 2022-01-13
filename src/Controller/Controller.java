@@ -4,10 +4,10 @@ import Model.Containers.IList;
 import Model.Containers.MyList;
 import Model.ProgramState;
 import Repository.IRepository;
-import Repository.Repository;
 
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -18,6 +18,7 @@ public class Controller implements IController {
 
     public Controller(IRepository repository) {
         this.repository = repository;
+        executor = Executors.newFixedThreadPool(10);
     }
 
     public IRepository getRepository() {
@@ -72,14 +73,18 @@ public class Controller implements IController {
     @Override
     public void allSteps() throws Exception {
         executor = Executors.newFixedThreadPool(2);
-        List<ProgramState> states = removeCompletedProgram(repository.getProgramStatesList().getAll());
+        List<ProgramState> states = removeCompletedProgram(repository.getProgramStatesList());
         while (states.size() > 0) {
             oneStepForAllPrograms(states);
-            states = removeCompletedProgram(repository.getProgramStatesList().getAll());
+            states = removeCompletedProgram(repository.getProgramStatesList());
         }
         executor.shutdownNow();
         IList<ProgramState> copyStates = new MyList<ProgramState>(states);
         repository.setProgramStatesList(copyStates);
+    }
+
+    public void shutDownExecutor() {
+        executor.shutdownNow();
     }
 
     public List<ProgramState> removeCompletedProgram(List<ProgramState> inPrgList) {

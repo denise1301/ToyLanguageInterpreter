@@ -40,4 +40,10 @@ public class MyStack<T> implements IStack<T> {
     public List<T> getAll() {
         return stack;
     }
+
+    @Override
+    public Stack<T> cloneStack() {
+        Stack<T> clone = (Stack<T>) stack.clone();
+        return clone;
+    }
 }

@@ -18,7 +18,7 @@ public class Controller implements IController {
 
     public Controller(IRepository repository) {
         this.repository = repository;
-        executor = Executors.newFixedThreadPool(10);
+        //executor = Executors.newFixedThreadPool(10);
     }
 
     public IRepository getRepository() {
@@ -26,6 +26,8 @@ public class Controller implements IController {
     }
 
     public void oneStepForAllPrograms(List<ProgramState> states) throws Exception {
+        executor = Executors.newFixedThreadPool(2);
+
         //print for each program state
         states.forEach(state -> {
             try {
@@ -66,8 +68,12 @@ public class Controller implements IController {
         });
 
         //save current program states in the repository
-        IList<ProgramState> copyStates = new MyList<ProgramState>(states);
-        this.repository.setProgramStatesList(copyStates);
+        //IList<ProgramState> copyStates = new MyList<ProgramState>(states);
+        //this.repository.setProgramStatesList(copyStates);
+        List<ProgramState> statesList = new ArrayList<>(states);
+        List<ProgramState> removedStatesList = removeCompletedProgram(statesList);
+        IList<ProgramState> statesIList = new MyList<>(removedStatesList);
+        repository.setProgramStatesList(statesIList);
     }
 
     @Override

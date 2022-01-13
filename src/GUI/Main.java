@@ -142,7 +142,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             primaryStage.setTitle("Choose an example");
-            ListView statements = new ListView();
+            ListView<String> statements = new ListView<>();
             statements.getItems().add("1. " + ex1);
             statements.getItems().add("2. " + ex2);
             statements.getItems().add("3. " + ex3);
@@ -168,7 +168,7 @@ public class Main extends Application {
             pane.setAlignment(Pos.TOP_CENTER);
             pane.add(statements, 1, 0);
             pane.add(selectStatementButton, 1, 1);
-            GridPane.setHalignment(selectStatementButton, HPos.CENTER); //CENTER THE BUTTON ON THE GRIDPANE CELL
+            GridPane.setHalignment(selectStatementButton, HPos.CENTER);
             GridPane.setValignment(selectStatementButton, VPos.CENTER);
 
             Scene mainScene = new Scene(pane, 800, 600);
@@ -219,6 +219,8 @@ public class Main extends Application {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "There was no program selected!", ButtonType.OK);
                 alert.showAndWait();
         }
+
+        // type checking
         IMap<String, IType> check = new MyMap<>();
         try {
             statement.typeCheck(check);
@@ -226,6 +228,8 @@ public class Main extends Application {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
+
+
         ProgramState state = new ProgramState(statement);
         IRepository repository = new Repository(state, "logFile" + index + "" + ".out");
         repository.addState(state);
@@ -237,17 +241,17 @@ public class Main extends Application {
         TextField programStatesCount = new TextField(repository.getProgramStatesList().size() + ""); // the number of PrgStates as a Text Field
         programStatesCount.setEditable(false);
         Label countLabel = new Label("Program States count");
-        countLabel.setFont(new Font("Arial", 18));
+        countLabel.setFont(new Font("Verdana", 18));
         countLabel.setStyle("-fx-font-weight: bold");
         VBox count = new VBox();
         count.getChildren().addAll(countLabel, programStatesCount);
         count.setSpacing(5);
         count.setAlignment(Pos.CENTER);
-        windowGrid.add(count, 0,0);
+        windowGrid.add(count, 0,2);
 
         // HEAP TABLE
         Label heapLabel = new Label("Heap Table");
-        heapLabel.setFont(new Font("Arial", 18));
+        heapLabel.setFont(new Font("Verdana", 18));
         heapLabel.setStyle("-fx-font-weight: bold");
         VBox heap = new VBox();
         TableView<Map.Entry<String,String>> heapTable = new TableView<>();
@@ -260,23 +264,22 @@ public class Main extends Application {
         heap.getChildren().addAll(heapLabel, heapTable);
         heap.setSpacing(5);
         heap.setAlignment(Pos.CENTER);
-        windowGrid.add(heap, 1, 0);
+        windowGrid.add(heap, 1, 1);
 
         // OUTPUT
         Label outputLabel = new Label("Output");
-        outputLabel.setFont(new Font("Arial", 18));
+        outputLabel.setFont(new Font("Verdana", 18));
         outputLabel.setStyle("-fx-font-weight: bold");
         VBox out = new VBox();
-        ListView outList = new ListView();
+        ListView<String> outList = new ListView<>();
         out.getChildren().addAll(outputLabel, outList);
         out.setSpacing(5);
         out.setAlignment(Pos.CENTER);
-        windowGrid.add(out, 2, 0);
-
+        windowGrid.add(out, 2, 1);
 
         // FILE TABLE
         Label fileTableLabel = new Label("File Table");
-        fileTableLabel.setFont(new Font("Arial", 18));
+        fileTableLabel.setFont(new Font("Verdana", 18));
         fileTableLabel.setStyle("-fx-font-weight: bold");
         VBox fileTable = new VBox();
         ListView fileTableList = new ListView();
@@ -285,15 +288,14 @@ public class Main extends Application {
         fileTable.setAlignment(Pos.CENTER);
         windowGrid.add(fileTable, 0, 1);
 
-
         // SYMBOL TABLE
         Label symbolTableLabel = new Label("Symbol Table");
-        symbolTableLabel.setFont(new Font("Arial", 18));
+        symbolTableLabel.setFont(new Font("Verdana", 18));
         symbolTableLabel.setStyle("-fx-font-weight: bold");
         TableView<Map.Entry<String,String>> symTable = new TableView<>();
         symTable.setEditable(true);
-        TableColumn<Map.Entry<String, String>, String> varName = new TableColumn<>("Var Name");
-        TableColumn<Map.Entry<String, String>, String> varValue = new TableColumn<>("Var Value");
+        TableColumn<Map.Entry<String, String>, String> varName = new TableColumn<>("Variable Name");
+        TableColumn<Map.Entry<String, String>, String> varValue = new TableColumn<>("Variable Value");
         varName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey()));
         varValue.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue()));
         symTable.getColumns().addAll(varName, varValue);
@@ -301,28 +303,26 @@ public class Main extends Application {
         sTable.getChildren().addAll(symbolTableLabel, symTable);
         sTable.setSpacing(5);
         sTable.setAlignment(Pos.CENTER);
-        windowGrid.add(sTable, 2, 1);
-
+        windowGrid.add(sTable, 1, 0);
 
         // EXECUTION STACK
         Label stackLabel = new Label("Execution Stack");
-        stackLabel.setFont(new Font("Arial", 18));
+        stackLabel.setFont(new Font("Verdana", 18));
         stackLabel.setStyle("-fx-font-weight: bold");
-        ListView exeStackList = new ListView();
+        ListView<String> exeStackList = new ListView<>();
         VBox exeStack = new VBox();
         exeStack.getChildren().addAll(stackLabel, exeStackList);
         exeStack.setSpacing(5);
         exeStack.setAlignment(Pos.CENTER);
-        windowGrid.add(exeStack, 0, 2);
-
+        windowGrid.add(exeStack, 0, 0);
 
         // PROGRAM STATES IDENTIFIERS
         Label identifiersLabel = new Label("Program States Identifiers");
-        identifiersLabel.setFont(new Font("Arial", 18));
+        identifiersLabel.setFont(new Font("Verdana", 18));
         identifiersLabel.setStyle("-fx-font-weight: bold");
-        ListView prgStateIdentifiersList = new ListView();
+        ListView<ProgramState> prgStateIdentifiersList = new ListView<>();
         prgStateIdentifiersList.getItems().add(state);
-        prgStateIdentifiersList.setCellFactory(TextFieldListCell.forListView(new StringConverter<ProgramState>() {
+        prgStateIdentifiersList.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(ProgramState programState) {
                 return Integer.toString(programState.getIdThread());
@@ -337,15 +337,13 @@ public class Main extends Application {
         prgStateIdentifiers.getChildren().addAll(identifiersLabel, prgStateIdentifiersList);
         prgStateIdentifiers.setSpacing(5);
         prgStateIdentifiers.setAlignment(Pos.CENTER);
-        windowGrid.add(prgStateIdentifiers, 1, 1);
+        windowGrid.add(prgStateIdentifiers, 2, 0);
 
         prgStateIdentifiersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        // We create a listener on the programStatesListView, which in our case will look if there are changes regarding
-        // the current program state, more exactly, if there is a current program state selected and it is changed,
-        // the necessary changes in the tables/lists will be done as well
+
         prgStateIdentifiersList.getSelectionModel().selectedItemProperty().addListener((a, b, stateNew)-> {
             if (stateNew != null)
-                update((ProgramState) stateNew, symTable, exeStackList);
+                update(stateNew, symTable, exeStackList);
         });
 
         Button oneStep = new Button("Run One Step");
@@ -355,13 +353,13 @@ public class Main extends Application {
             try {
                 List<ProgramState> states = controller.getRepository().getProgramStatesList();
                 controller.oneStepForAllPrograms(states);
-                System.out.println(state);
+                //System.out.println(state);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
             exeStackList.getItems().clear();
-            IStack<IStatement> executionStackNew = state.getExecutionStack();
+            Stack<IStatement> executionStackNew = state.getExecutionStack().cloneStack();
             while(!executionStackNew.isEmpty()) {
                 exeStackList.getItems().add(executionStackNew.pop().toString());
             }
@@ -369,7 +367,7 @@ public class Main extends Application {
             outList.getItems().clear();
             IList<IValue> outTemp = state.getOut();
             for(int i = 0; i < outTemp.size(); i++)
-                outList.getItems().add(outTemp.get(i));
+                outList.getItems().add(outTemp.get(i).toString());
 
             prgStateIdentifiersList.getItems().clear();
             for(ProgramState p : repository.getProgramStatesList())
@@ -420,11 +418,10 @@ public class Main extends Application {
         executionStack.getItems().clear();
 
         executionStack.getItems().clear();
-        IStack<IStatement> newStack = state.getExecutionStack();
+        Stack<IStatement> newStack = state.getExecutionStack().cloneStack();
         while (!newStack.isEmpty()) {
             executionStack.getItems().add(newStack.pop().toString());
         }
-
         symbolTable.getItems().clear();
         IMap<String, IValue> symbolTableNew = state.getSymbolTable();
         List<Map.Entry<String,String>> symbolTableList = new ArrayList<>();

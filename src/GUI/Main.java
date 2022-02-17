@@ -137,6 +137,72 @@ public class Main extends Application {
                                                     new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a"))))))),
                                             new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new HeapReadingExpression(new VarExpression("a")))))))));
 
+    private final IStatement ex11 =
+            new CompStatement(
+                    new VarDeclStatement("v", new IntType()),
+                    new CompStatement(
+                            new VarDeclStatement("x", new IntType()),
+                            new CompStatement(
+                                    new VarDeclStatement("y", new IntType()),
+                                    new CompStatement(
+                                            new AssignStatement("v", new ValueExpression(new IntValue(0))),
+                                            new CompStatement(
+                                                    new RepeatUntilStatement(
+                                                            new CompStatement(
+                                                                    new ForkStatement(
+                                                                            new CompStatement(
+                                                                                    new PrintStatement(new VarExpression("v")),
+                                                                                    new AssignStatement("v",
+                                                                                            new ArithmeticExpression(
+                                                                                                    new VarExpression("v"),
+                                                                                                    new ValueExpression(new IntValue(1)),
+                                                                                                    ArithmeticOperation.MINUS)))),
+                                                                    new AssignStatement("v",
+                                                                            new ArithmeticExpression(
+                                                                                    new VarExpression("v"),
+                                                                                    new ValueExpression(new IntValue(1)),
+                                                                                    ArithmeticOperation.PLUS))),
+                                                            new RelationalExpression(new VarExpression("v"), new ValueExpression(new IntValue(3)), "==")),
+                                                    new CompStatement(
+                                                            new AssignStatement("x", new ValueExpression(new IntValue(1))),
+                                                            new CompStatement(
+                                                                    new NopStatement(),
+                                                                    new CompStatement(
+                                                                            new AssignStatement("y", new ValueExpression(new IntValue(3))),
+                                                                            new CompStatement(
+                                                                                    new NopStatement(),
+                                                                                    new PrintStatement(new ArithmeticExpression(new VarExpression("v"), new ValueExpression(new IntValue(10)), ArithmeticOperation.MULTIPLY))
+                                                                            )
+                                                                    )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            );
+
+    private final IStatement ex12 = new CompStatement(new VarDeclStatement("v1", new RefType(new IntType())),
+            new CompStatement(new VarDeclStatement("v2", new RefType(new IntType())),
+                    new CompStatement(new VarDeclStatement("v3", new RefType(new IntType())),
+                            new CompStatement(new VarDeclStatement("cnt", new BoolType()),
+                                    new CompStatement(new HeapAllocationStatement("v1", new ValueExpression(new IntValue(2))),
+                                            new CompStatement(new HeapAllocationStatement("v2", new ValueExpression(new IntValue(3))),
+                                                    new CompStatement(new HeapAllocationStatement("v3", new ValueExpression(new IntValue(4))),
+                                                            new CompStatement(new NewLatchStatement("cnt", new HeapReadingExpression(new VarExpression("v2"))),
+                                                                    new CompStatement(new ForkStatement(new CompStatement(new HeapWritingStatement("v1", new ArithmeticExpression(new HeapReadingExpression(new VarExpression("v1")), new ValueExpression(new IntValue(10)), ArithmeticOperation.MULTIPLY)),
+                                                                            new CompStatement(new PrintStatement(new HeapReadingExpression(new VarExpression("v1"))),
+                                                                                    new CompStatement(new CountDownStatement("cnt"),
+                                                                                            new ForkStatement(new CompStatement(new HeapWritingStatement("v2", new ArithmeticExpression(new HeapReadingExpression(new VarExpression("v2")), new ValueExpression(new IntValue(10)), ArithmeticOperation.MULTIPLY)),
+                                                                                                    new CompStatement(new PrintStatement(new HeapReadingExpression(new VarExpression("v2"))),
+                                                                                                            new CompStatement(new CountDownStatement("cnt"),
+                                                                                                                    new ForkStatement(new CompStatement(new HeapWritingStatement("v3", new ArithmeticExpression(new HeapReadingExpression(new VarExpression("v3")), new ValueExpression(new IntValue(10)), ArithmeticOperation.MULTIPLY)),
+                                                                                                                            new CompStatement(new PrintStatement(new HeapReadingExpression(new VarExpression("v3"))),
+                                                                                                                                    new CountDownStatement("cnt")))))))))))),
+                                                                            new CompStatement(new AwaitStatement("cnt"),
+                                                                                    new CompStatement(new PrintStatement(new ValueExpression(new IntValue(100))),
+                                                                                            new CompStatement(new CountDownStatement("cnt"), new PrintStatement(new ValueExpression(new IntValue(100)))))))))))))));
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -153,6 +219,8 @@ public class Main extends Application {
             statements.getItems().add("8. " + ex8);
             statements.getItems().add("9. " + ex9);
             statements.getItems().add("10. " + ex10);
+            statements.getItems().add("11. " + ex11);
+            statements.getItems().add("12. " + ex12);
             statements.setPrefSize(800, 600);
 
             Button selectStatementButton = new Button("Run example");
@@ -214,6 +282,12 @@ public class Main extends Application {
             case 10:
                 statement = ex10;
                 break;
+            case 11:
+                statement = ex11;
+                break;
+            case 12:
+                statement = ex12;
+                break;
             default:
                 statement = null;
                 Alert alert = new Alert(Alert.AlertType.ERROR, "There was no program selected!", ButtonType.OK);
@@ -247,17 +321,17 @@ public class Main extends Application {
         count.getChildren().addAll(countLabel, programStatesCount);
         count.setSpacing(5);
         count.setAlignment(Pos.CENTER);
-        windowGrid.add(count, 0,2);
+        windowGrid.add(count, 0, 2);
 
         // HEAP TABLE
         Label heapLabel = new Label("Heap Table");
         heapLabel.setFont(new Font("Verdana", 18));
         heapLabel.setStyle("-fx-font-weight: bold");
         VBox heap = new VBox();
-        TableView<Map.Entry<String,String>> heapTable = new TableView<>();
+        TableView<Map.Entry<String, String>> heapTable = new TableView<>();
         heapTable.setEditable(true);
-        TableColumn<Map.Entry<String,String>,String> addressCol = new TableColumn<>("Address");
-        TableColumn<Map.Entry<String,String>,String> valueCol = new TableColumn<>("Value");
+        TableColumn<Map.Entry<String, String>, String> addressCol = new TableColumn<>("Address");
+        TableColumn<Map.Entry<String, String>, String> valueCol = new TableColumn<>("Value");
         addressCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey()));
         valueCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue()));
         heapTable.getColumns().addAll(addressCol, valueCol);
@@ -265,6 +339,23 @@ public class Main extends Application {
         heap.setSpacing(5);
         heap.setAlignment(Pos.CENTER);
         windowGrid.add(heap, 1, 1);
+
+        // LATCH TABLE
+        Label latchTableLabel = new Label("Latch Table");
+        latchTableLabel.setFont(new Font("Verdana", 18));
+        latchTableLabel.setStyle("-fx-font-weight: bold");
+        VBox latch = new VBox();
+        TableView<Map.Entry<String, String>> latchTable = new TableView<>();
+        heapTable.setEditable(true);
+        TableColumn<Map.Entry<String, String>, String> location = new TableColumn<>("Location");
+        TableColumn<Map.Entry<String, String>, String> value = new TableColumn<>("Value");
+        location.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey()));
+        value.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue()));
+        latchTable.getColumns().addAll(location, value);
+        latch.getChildren().addAll(latchTableLabel, latchTable);
+        latch.setSpacing(5);
+        latch.setAlignment(Pos.CENTER);
+        windowGrid.add(latch, 1, 2);
 
         // OUTPUT
         Label outputLabel = new Label("Output");
@@ -292,7 +383,7 @@ public class Main extends Application {
         Label symbolTableLabel = new Label("Symbol Table");
         symbolTableLabel.setFont(new Font("Verdana", 18));
         symbolTableLabel.setStyle("-fx-font-weight: bold");
-        TableView<Map.Entry<String,String>> symTable = new TableView<>();
+        TableView<Map.Entry<String, String>> symTable = new TableView<>();
         symTable.setEditable(true);
         TableColumn<Map.Entry<String, String>, String> varName = new TableColumn<>("Variable Name");
         TableColumn<Map.Entry<String, String>, String> varValue = new TableColumn<>("Variable Value");
@@ -341,7 +432,7 @@ public class Main extends Application {
 
         prgStateIdentifiersList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        prgStateIdentifiersList.getSelectionModel().selectedItemProperty().addListener((a, b, stateNew)-> {
+        prgStateIdentifiersList.getSelectionModel().selectedItemProperty().addListener((a, b, stateNew) -> {
             if (stateNew != null)
                 update(stateNew, symTable, exeStackList);
         });
@@ -349,7 +440,7 @@ public class Main extends Application {
         Button oneStep = new Button("Run One Step");
         oneStep.setAlignment(Pos.CENTER);
 
-        oneStep.setOnAction(e-> {
+        oneStep.setOnAction(e -> {
             try {
                 List<ProgramState> states = controller.getRepository().getProgramStatesList();
                 controller.oneStepForAllPrograms(states);
@@ -358,25 +449,36 @@ public class Main extends Application {
                 ex.printStackTrace();
             }
 
+            latchTable.getItems().clear();
+            ILatchTable latchTableTemp = state.getLatchTable();
+            List<Map.Entry<String, String>> latchTableList = new ArrayList<>();
+            for (Map.Entry<Integer, Integer> elem : latchTableTemp.getLatchTable().entrySet()) {
+                Map.Entry<String, String> el = new AbstractMap.SimpleEntry<>(elem.getKey().toString(), elem.getValue().toString());
+                latchTableList.add(el);
+            }
+            latchTable.setItems(FXCollections.observableList(latchTableList));
+            latchTable.refresh();
+
+
             exeStackList.getItems().clear();
             Stack<IStatement> executionStackNew = state.getExecutionStack().cloneStack();
-            while(!executionStackNew.isEmpty()) {
+            while (!executionStackNew.isEmpty()) {
                 exeStackList.getItems().add(executionStackNew.pop().toString());
             }
 
             outList.getItems().clear();
             IList<IValue> outTemp = state.getOut();
-            for(int i = 0; i < outTemp.size(); i++)
+            for (int i = 0; i < outTemp.size(); i++)
                 outList.getItems().add(outTemp.get(i).toString());
 
             prgStateIdentifiersList.getItems().clear();
-            for(ProgramState p : repository.getProgramStatesList())
+            for (ProgramState p : repository.getProgramStatesList())
                 prgStateIdentifiersList.getItems().add(p);
 
             symTable.getItems().clear();
-            IMap<String, IValue> symbolTableTemp= state.getSymbolTable();
-            List<Map.Entry<String,String>> symbolTableList = new ArrayList<>();
-            for(Map.Entry<String, IValue> entry : symbolTableTemp.getAll().entrySet()){
+            IMap<String, IValue> symbolTableTemp = state.getSymbolTable();
+            List<Map.Entry<String, String>> symbolTableList = new ArrayList<>();
+            for (Map.Entry<String, IValue> entry : symbolTableTemp.getAll().entrySet()) {
                 Map.Entry<String, String> el = new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().toString());
                 symbolTableList.add(el);
             }
@@ -386,7 +488,7 @@ public class Main extends Application {
             heapTable.getItems().clear();
             IHeap<IValue> heapTemp = state.getHeap();
             List<Map.Entry<String, String>> heapTableList = new ArrayList<>();
-            for(Map.Entry<Integer, IValue> elem : heapTemp.getContent().entrySet()){
+            for (Map.Entry<Integer, IValue> elem : heapTemp.getContent().entrySet()) {
                 Map.Entry<String, String> el = new AbstractMap.SimpleEntry<>(elem.getKey().toString(), elem.getValue().toString());
                 heapTableList.add(el);
             }
@@ -412,7 +514,7 @@ public class Main extends Application {
         newStage.show();
     }
 
-    void update(ProgramState state, TableView symbolTable, ListView executionStack){
+    void update(ProgramState state, TableView symbolTable, ListView executionStack) {
 
         symbolTable.getItems().clear();
         executionStack.getItems().clear();
@@ -424,8 +526,8 @@ public class Main extends Application {
         }
         symbolTable.getItems().clear();
         IMap<String, IValue> symbolTableNew = state.getSymbolTable();
-        List<Map.Entry<String,String>> symbolTableList = new ArrayList<>();
-        for(Map.Entry<String, IValue> elem: symbolTableNew.getAll().entrySet()){
+        List<Map.Entry<String, String>> symbolTableList = new ArrayList<>();
+        for (Map.Entry<String, IValue> elem : symbolTableNew.getAll().entrySet()) {
             Map.Entry<String, String> el = new AbstractMap.SimpleEntry<>(elem.getKey(), elem.getValue().toString());
             symbolTableList.add(el);
         }

@@ -17,6 +17,7 @@ public class ProgramState {
     private IList<IValue> out;
     private final IMap<StringValue, BufferedReader> fileTable;
     private final IHeap<IValue> heap;
+    private final ILatchTable latchTable;
 
     private synchronized static int getThreadId() {
         threadCount++;
@@ -29,6 +30,7 @@ public class ProgramState {
             IList<IValue> out,
             IMap<StringValue, BufferedReader> fileTable,
             IHeap<IValue> heap,
+            ILatchTable latchTable,
             IStatement statement) {
         threadId = getThreadId();
         this.originalProgram = statement;
@@ -37,6 +39,7 @@ public class ProgramState {
         this.out = out;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.latchTable = latchTable;
         this.executionStack.push(statement);
     }
 
@@ -47,6 +50,7 @@ public class ProgramState {
         out = new MyList<>();
         fileTable = new MyMap<>();
         heap = new MyHeap<>();
+        latchTable = new MyLatchTable();
         executionStack.push(statement);
         originalProgram = statement;
     }
@@ -84,6 +88,10 @@ public class ProgramState {
 
     public IHeap<IValue> getHeap() {
         return heap;
+    }
+
+    public ILatchTable getLatchTable() {
+        return latchTable;
     }
 
     public String toString() {

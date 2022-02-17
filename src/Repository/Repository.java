@@ -44,6 +44,7 @@ public class Repository implements IRepository {
         logFile.println(state.toString());
         logFile.flush();
         logFile.close();
+        //clear function
     }
 
     @Override

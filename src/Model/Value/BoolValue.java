@@ -26,6 +26,10 @@ public class BoolValue implements IValue {
         return "False";
     }
 
+    public boolean getOpposite() {
+        return !val;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || o.getClass() != this.getClass()){

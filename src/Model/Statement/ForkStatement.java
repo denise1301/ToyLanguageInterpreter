@@ -22,6 +22,7 @@ public class ForkStatement implements IStatement {
                 state.getOut(),
                 state.getFileTable(),
                 state.getHeap(),
+                state.getLatchTable(),
                 statement);
     }
 
